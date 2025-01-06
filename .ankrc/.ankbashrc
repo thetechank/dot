@@ -49,7 +49,7 @@ then
  export PATH="$PATH:/home/ank/.local/bin"
 fi
 
-export PATH="$PATH:/opt/nvim-linux64/bin"
+#export PATH="$PATH:/opt/nvim-linux64/bin"
 
 if [[ -f $HOMEBREW_PREFIX/opt/kube-ps1/share/kube-ps1.sh ]]
 then
