@@ -1,0 +1,12 @@
+#Alias for Kubernetes
+
+# alias k='kubectl'
+# alias mk='minikube'
+
+#alias kcn='kubectl config set-context --current --namespace'
+#Functions for Kubernetes
+unalias kcn 2>/dev/null
+# use this as passing blank sets it to default namespace
+function kcn() {
+  kubectl config set-context --current --namespace=$1
+}

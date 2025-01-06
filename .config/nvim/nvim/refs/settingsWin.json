@@ -1,0 +1,258 @@
+{    
+    "settingsSync.ignoredSettings": [
+        "xml.java.home",
+        "oracledevtools.connectionConfiguration.configFilesFolder",
+        "oracledevtools.bookmarkFileFolder",
+        "oracledevtools.connectionConfiguration.walletFileFolder",
+        "oracledevtools.download.otherFolder",
+        "remote.SSH.configFile",
+        "vim.vimrc.path",
+        "vim.handleKeys",
+        "vscode-neovim.useWSL",
+        "vscode-neovim.neovimExecutablePaths.linux",
+        "vscode-neovim.ctrlKeysForInsertMode",
+        "vscode-neovim.ctrlKeysForNormalMode"
+    ],
+    "workbench.startupEditor": "newUntitledFile",
+    "editor.mouseWheelZoom": true,
+    "editor.minimap.enabled": false,
+    "files.associations": {
+        "*.pkb": "plsql"
+    },
+    "python.pythonPath": "C:\\Users\\Ankit\\anaconda3\\python.exe",
+    "editor.multiCursorModifier": "ctrlCmd",
+    "extensions.ignoreRecommendations": true,
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+    "editor.renderControlCharacters": false,
+    "python.languageServer": "Pylance",
+    "python.autoComplete.addBrackets": true,
+    "jupyter.askForKernelRestart": false,
+    "jupyter.allowUnauthorizedRemoteConnection": true,
+    "jupyter.textOutputLimit": 0,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
+    "jupyter.alwaysTrustNotebooks": true,
+    "workbench.settings.openDefaultSettings": true,
+    "[xml]": {
+        "editor.defaultFormatter": "redhat.vscode-xml"
+    },
+    "sql-formatter.uppercase": true,
+    "sql-formatter.dialect": "pl/sql",
+    "XSLT.tasks.saxonJar": "C:\\\\Saxon\\\\SaxonHE10-5J\\\\saxon-he-10.5.jar",
+    "redhat.telemetry.enabled": true,
+    "oracledevtools.connections": [
+        {
+            "authenticationType": 2,
+            "dBAPrivilege": "None",
+            "userID": "ALFALAK_UIDB",
+            "passwordSaved": true,
+            "dataSource": "db202010021408_high",
+            "connectionType": 1,
+            "tnsAdmin": "c:\\Users\\Ankit\\Oracle\\network\\admin\\Wallet_SaudiCont",
+            "walletLocation": "c:\\Users\\Ankit\\Oracle\\network\\admin\\Wallet_SaudiCont",
+            "name": "ALFALAK_UIDB.db202010021408_high",
+            "currentSchema": "",
+            "passwordStore": "Secret Storage"
+        }
+    ],
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    "security.workspace.trust.untrustedFiles": "open",
+    "workbench.editor.titleScrollbarSizing": "large",
+    "terminal.integrated.tabs.title": "",
+    "terminal.integrated.tabs.description": "${task}${separator}${local}${separator}${cwd}",
+    "files.exclude": {
+        "**/.git": false,
+        "**/.gitttttt": true
+    },
+    "vs-kubernetes": {
+        "vscode-kubernetes.minikube-path.windows": "C:\\Users\\ankit.k.shukla\\.vs-kubernetes\\tools\\minikube\\windows-amd64\\minikube.exe",
+        "vscode-kubernetes.minikube-path.mac": "/Users/ank/.vs-kubernetes/tools/minikube/darwin-arm64/minikube"
+    },
+    "xml.server.binary.trustedHashes": [
+        "75545f1685acea66aed67cb886c59e49cbbf0f51c25c89baad76cf0a3ee962a7"
+    ],
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "editor.accessibilitySupport": "off",
+    "settingsSync.ignoredExtensions": [],
+    "yaml.schemas": {},
+    "hediet.vscode-drawio.resizeImages": null,
+    "hediet.vscode-drawio.codeLinkActivated": false,
+    "hediet.vscode-drawio.theme": "automatic",
+    "workbench.editor.empty.hint": "hidden",
+    "terminal.integrated.profiles.osx": {
+        "x86 zsh": {
+            "path": "/usr/bin/arch",
+            "args": [
+                "-arch",
+                "x86_64",
+                "/bin/zsh"
+            ]
+        }
+    },
+    "workbench.colorTheme": "GitHub Dark",
+    "workbench.iconTheme": "vscode-icons",
+    "security.allowedUNCHosts": [
+        "tsn.tno.nl",
+        "tdv.tno.nl",
+        "wsl.localhost"
+    ],
+    "oracledevtools.bookmarkFileFolder": "C:\\Users\\shuklaaak\\Oracle\\oracle.oracledevtools",
+    "oracledevtools.download.otherFolder": "C:\\Users\\shuklaaak\\downloads",
+    "oracledevtools.connectionConfiguration.configFilesFolder": "C:\\Users\\shuklaaak\\Oracle\\network\\admin",
+    "[oraclesql]": {
+        "editor.suggest.showSnippets": true,
+        "editor.quickSuggestions": {
+            "comments": "on",
+            "strings": "on",
+            "other": "on"
+        }
+    },
+    "oracledevtools.connectionConfiguration.walletFileFolder": "C:\\Users\\shuklaaak\\Oracle\\network\\admin",
+    "remote.SSH.remotePlatform": {
+        "liqotest": "linux",
+        "pc-benji02-u22": "linux",
+        "pc-ctrl01": "linux",
+        "juju-cli": "linux",
+        "pc-migrate02": "linux",
+        "dev": "linux",
+        "k8s-bgp01": "linux",
+        "ecofedpd": "linux",
+        "ecofedpc": "linux",
+        "fnsjh": "linux"
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "remote.SSH.configFile": "C:\\Users\\shuklaaak\\.ssh\\config",
+    "oracledevtools.connectionConfiguration.showPromptForPasswordStoreMigrationToSecretStorage": false,
+    "terminal.integrated.inheritEnv": false,
+    "explorer.compactFolders": false,
+    "gitlens.blame.heatmap.enabled": false,
+    "gitlens.codeLens.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "python.analysis.packageIndexDepths": [
+        {
+            "name": "sklearn",
+            "depth": 2
+        },
+        {
+            "name": "matplotlib",
+            "depth": 2
+        },
+        {
+            "name": "scipy",
+            "depth": 2
+        },
+        {
+            "name": "django",
+            "depth": 2
+        },
+        {
+            "name": "flask",
+            "depth": 2
+        },
+        {
+            "name": "fastapi",
+            "depth": 2
+        }
+    ],
+    "[xslt]": {
+        "editor.semanticHighlighting.enabled": true
+    },
+    "editor.fontLigatures": "'calt', 'liga', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'",
+    "editor.fontWeight": "200",
+    "editor.fontFamily": "'Monaspace Neon Var', 'Monaspace Neon', monospace,'Courier New'",
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "comment",
+                "settings": {
+                    "fontStyle": "italic"
+                }
+            }
+        ]
+    },
+    "editor.fontSize": 14,
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "\\\\wsl.localhost\\Ubuntu\\home\\ank\\.vim\\vimrc",
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false,
+        "<C-d>": false,
+        "<C-c>": false,
+        "<C-x>": false,
+        "<C-v>": false,
+        "<C-z>": false,
+        "<C-y>": false
+    },
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "vscode-neovim.useWSL": true,
+    "vscode-neovim.neovimExecutablePaths.linux": "/opt/nvim-linux64/bin/nvim",
+    "editor.lineNumbers": "relative",
+    "github.copilot.advanced": {},
+    "keyboard.mapAltGrToCtrlAlt": true,
+    "vscode-neovim.ctrlKeysForInsertMode": [
+        "d",
+        "h",
+        "j",
+        "m",
+        "o",
+        "r",
+        "t",
+        "u",
+        "w"
+    ],
+    "vscode-neovim.compositeTimeout": 200,
+    "vscode-neovim.compositeKeys": {
+        "jj": {
+            "command": "vscode-neovim.escape"
+        },
+        "jk": {
+            "command": "vscode-neovim.lua",
+            "args": [
+                [
+                    "local code = require('vscode')",
+                    "code.action('vscode-neovim.escape')",
+                    "code.action('workbench.action.files.save')",
+                ]
+            ]
+        }
+    },
+    "vscode-neovim.ctrlKeysForNormalMode": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "o",
+        "r",
+        "t",
+        "u",
+        "v",
+        "w",
+        "x",
+        "y",
+        "z",
+        "/",
+        "]",
+        "right",
+        "left",
+        "up",
+        "down",
+        "backspace",
+        "delete"
+    ]
+}

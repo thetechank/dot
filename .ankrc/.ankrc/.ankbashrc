@@ -1,0 +1,60 @@
+# Add the below to bashrc
+#[[ -f ~/.ankbashrc ]] && source ~/.ankbashrc
+
+[[ -f /home/linuxbrew/.linuxbrew/bin/brew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+## Ankit
+for file in $(find ~/.ankcmd/.pre -maxdepth 1 -type f -prune ! -name '*DS*' | sort)
+do
+  source $file
+done
+
+for file in $(find ~/.ankcmd/.post -maxdepth 1 -type f -prune ! -name '*DS*' | sort)
+do
+  source $file
+done
+
+
+# Env Variables
+## Python Env Variables
+export PIPENV_VENV_IN_PROJECT="true"
+export POETRY_VIRTUALENVS_IN_PROJECT="true"
+export PYTHONPYCACHEPREFIX=~/Library/Caches/pycache
+#[[ -f ~/.ankrc/.vimrc ]] && export VIMINIT='source ~/.ankrc/.vimrc'
+
+# if command -v conda &> /dev/null
+# then
+  # >>> conda initialize >>>
+  # !! Contents within this block are managed by 'conda init' !!
+  __conda_setup="$('/home/ank/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+  else
+      if [ -f "/home/ank/miniconda3/etc/profile.d/conda.sh" ]; then
+          . "/home/ank/miniconda3/etc/profile.d/conda.sh"
+      else
+          export PATH="/home/ank/miniconda3/bin:$PATH"
+      fi
+   fi
+  unset __conda_setup
+  # <<< conda initialize <<<
+  # conda disable base
+  #conda config --set auto_activate_base false
+# fi
+
+
+if command -v pipx &> /dev/null
+then
+ # Created by `pipx` on 2024-06-26 11:21:19
+ export PATH="$PATH:/home/ank/.local/bin"
+fi
+
+export PATH="$PATH:/opt/nvim-linux64/bin"
+
+if [[ -f $HOMEBREW_PREFIX/opt/kube-ps1/share/kube-ps1.sh ]]
+then
+  source $HOMEBREW_PREFIX/opt/kube-ps1/share/kube-ps1.sh
+  # RPROMPT='$(kube_ps1)'
+  PS1='$(kube_ps1)'$PS1
+fi
+

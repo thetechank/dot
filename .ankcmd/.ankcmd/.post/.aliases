@@ -1,0 +1,4 @@
+# Aliases that override oh-my-zsh
+
+# alias test="echo Hello from arm64"
+#alias ohmyzsh='echo Bye Ankit!!!'

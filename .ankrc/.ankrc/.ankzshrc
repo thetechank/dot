@@ -1,0 +1,84 @@
+# Setup ARM HomeBrew Default. 
+# Keep it before other homebrew as the commands adds path to the start
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+for file in $(find ~/.ankcmd/.pre -maxdepth 1 -type f -prune ! -name '*DS*' | sort)
+do
+  source $file
+done
+
+[[ -f ~/.ankrc/.ank_oh-my-zsh ]] && source ~/.ankrc/.ank_oh-my-zsh
+
+for file in $(find ~/.ankcmd/.post -maxdepth 1 -type f -prune ! -name '*DS*' | sort)
+do
+  source $file
+done
+
+# Env Variables
+## Python Env Variables
+export PIPENV_VENV_IN_PROJECT="true"
+export POETRY_VIRTUALENVS_IN_PROJECT="true"
+export PYTHONPYCACHEPREFIX=~/Library/Caches/pycache
+
+#[[ -f ~/.ankrc/.vimrc ]] && export VIMINIT='source ~/.ankrc/.vimrc'
+
+# if command -v conda &> /dev/null
+# then
+  # >>> conda initialize >>>
+  # !! Contents within this block are managed by 'conda init' !!
+  __conda_setup="$('/Users/ank/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+  else
+      if [ -f "/Users/ank/miniconda3/etc/profile.d/conda.sh" ]; then
+          . "/Users/ank/miniconda3/etc/profile.d/conda.sh"
+      else
+          export PATH="/Users/ank/miniconda3/bin:$PATH"
+      fi
+  fi
+  unset __conda_setup
+  # <<< conda initialize <<<
+  
+  # conda disable base
+  #conda config --set auto_activate_base false
+# fi
+
+if [[ $(arch) = "i386" ]]
+then
+  for file in $(find ~/.ankrc/.i386 -maxdepth 1 -type f -prune ! -name '*DS*' | sort)
+  do
+    source $file
+  done
+elif [[ $(arch) = "arm64" ]]
+then
+  for file in $(find ~/.ankrc/.arm64 -maxdepth 1 -type f -prune ! -name '*DS*' | sort)
+  do
+    source $file
+  done
+fi
+
+if command -v pipx &> /dev/null
+then
+  # Created by `pipx` on 2023-10-27 10:43:08
+  export PATH="$PATH:/Users/ank/.local/bin"
+fi
+
+if [[ -f $HOMEBREW_PREFIX/opt/kube-ps1/share/kube-ps1.sh ]]
+then
+  source $HOMEBREW_PREFIX/opt/kube-ps1/share/kube-ps1.sh
+  RPROMPT='$(kube_ps1)'
+fi
+
+# if command -v kubesess &> /dev/null
+# then
+#   source ${HOMEBREW_PREFIX}/share/zsh/site-functions/kubesess.sh
+#   source ${HOMEBREW_PREFIX}/opt/kubesess/etc/bash_completion.d/completion.sh
+# fi
+
+# Add Visual Studio Code (code)
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+# Add GNU Bash Commands as default
+PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
+PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:$PATH"
+PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"

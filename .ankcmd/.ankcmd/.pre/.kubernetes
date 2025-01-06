@@ -1,0 +1,72 @@
+#Alias for Kubernetes
+
+alias k='kubectl'
+alias mk='minikube'
+
+#alias kcn='kubectl config set-context --current --namespace'
+#Functions for Kubernetes
+
+# use this as passing blank sets it to default namespace
+function kcn() {
+  kubectl config set-context --current --namespace=$1
+}
+
+
+# Aliases and Functions for Kubernetes Config
+function setkube() {
+  if [ -f "$1" ]; then
+    eval "export KUBECONFIG=\"$1\""
+    echo "✅ KUBECONFIG set to: $1"
+  else
+    echo "❌ Error: File '$1' does not exist"
+    return 1
+  fi
+}
+
+# function addkube() {
+#   if [ -f "$1" ]; then
+#     eval "export KUBECONFIG=\"$KUBECONFIG:$1\""
+#     echo "✅ Added to KUBECONFIG: $1"
+#   else
+#     echo "❌ Error: File '$1' does not exist"
+#     return 1
+#   fi
+# }
+
+function addkube() {
+  if [ -f "$1" ]; then
+    if [ -z "$KUBECONFIG" ]; then
+      setkube "$1"
+    else
+      eval "export KUBECONFIG=\"$KUBECONFIG:$1\""
+      echo "✅ Added to KUBECONFIG: $1"
+    fi
+  else
+    echo "❌ Error: File '$1' does not exist"
+    return 1
+  fi
+}
+
+
+function removekube() {
+  if [ -z "$1" ]; then
+    echo "❌ Error: No file specified to remove."
+    return 1
+  fi
+
+  if [[ ":$KUBECONFIG:" == *":$1:"* ]]; then
+    # Remove the specified file from the KUBECONFIG variable
+    new_kubeconfig=$(echo "$KUBECONFIG" | tr ':' '\n' | grep -vF "$1" | tr '\n' ':' | sed 's/:$//')
+    eval "export KUBECONFIG=\"$new_kubeconfig\""
+    echo "✅ Removed from KUBECONFIG: $1"
+  else
+    echo "❌ Error: File '$1' is not in KUBECONFIG."
+  fi
+}
+
+
+alias kcgc='kubectl config get-contexts'
+alias kcv='kubectl config view --merge --flatten'
+alias kcvc='kubectl config view --minify --flatten --context'
+
+

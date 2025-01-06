@@ -1,0 +1,115 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+  {
+    "key": "alt+cmd+x",
+    "command": "bookmarks.clear",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+cmd+a",
+    "command": "bookmarks.list",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+cmd+r",
+    "command": "python.execInTerminal-icon",
+    "when": "editorTextFocus && editorLangId == 'python'"
+  },
+  {
+    "key": "ctrl+g t",
+    "command": "editor.action.goToTypeDefinition"
+  },
+  {
+    "key": "ctrl+g i",
+    "command": "editor.action.goToImplementation",
+    "when": "editorHasImplementationProvider && editorTextFocus"
+  },
+  {
+    "key": "cmd+f12",
+    "command": "-editor.action.goToImplementation",
+    "when": "editorHasImplementationProvider && editorTextFocus"
+  },
+  {
+    "key": "ctrl+g r",
+    "command": "editor.action.goToReferences",
+    "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+  },
+  {
+    "key": "shift+f12",
+    "command": "-editor.action.goToReferences",
+    "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+  },
+  {
+    "key": "cmd+k cmd+v",
+    "command": "vscode-neovim.restart"
+  },
+  {
+    "key": "cmd+k cmd+n",
+    "command": "vscode-neovim.stop"
+  },
+  {
+    "key": "ctrl+escape",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "!editorFocus"
+  },
+  {
+    "key": "ctrl+escape",
+    "command": "workbench.files.action.focusFilesExplorer",
+    "when": "searchViewletFocus"
+  },
+  {
+    "key": "shift+`",
+    "command": "workbench.action.closePanel"
+  },
+  {
+    "key": "ctrl+g d",
+    "command": "editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus"
+  },
+  {
+    "key": "f12",
+    "command": "-editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus"
+  },
+  {
+    "key": "ctrl+g ctrl+d",
+    "command": "editor.action.revealDefinitionAside",
+    "when": "editorHasDefinitionProvider && editorTextFocus && isWeb && !isInEmbeddedEditor"
+  },
+  {
+    "key": "cmd+k cmd+f12",
+    "command": "-editor.action.revealDefinitionAside",
+    "when": "editorHasDefinitionProvider && editorTextFocus && isWeb && !isInEmbeddedEditor"
+  },
+  {
+    "key": "ctrl+shift+up",
+    "command": "workbench.action.increaseViewSize"
+  },
+  {
+    "key": "ctrl+shift+down",
+    "command": "workbench.action.decreaseViewSize"
+  },
+  {
+    "key": "ctrl+shift+down",
+    "command": "workbench.action.terminal.resizePaneDown",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+shift+up",
+    "command": "workbench.action.terminal.resizePaneUp",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "cmd+k cmd+u",
+    "command": "-editor.action.removeCommentLine",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+k cmd+u",
+    "command": "workbench.action.toggleMaximizedPanel"
+  },
+  {
+    "key": "shift+alt+w",
+    "command": "editor.action.formatDocument.multiple"
+  },
+]

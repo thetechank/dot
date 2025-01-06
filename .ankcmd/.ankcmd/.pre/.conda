@@ -1,0 +1,31 @@
+# Aliases for conda
+alias condaa="conda activate"
+alias condad="conda deactivate"
+alias condac="conda create -n"
+alias condacp="conda create -p"
+alias condael="conda env list"
+# --from-history This will only include packages that you’ve explicitly asked for, as opposed to including every package in your environment
+# --no-builds is optional as it will remove builds. research more
+#conda env export --from-history --no-builds
+alias condaex="conda env export"
+
+#conda remove --name myenv --all
+alias condaerm="conda env remove --name"
+alias condaermp="conda env remove --prefix"
+
+#Fucntions for Conda
+
+function condacl() {
+  conda create --clone ${1} -n ${2} ${@:3}
+}
+# -n, --name Name of environment
+# -p, --prefix Full path to environment location
+# with prefix the env is not listed by name in conda env list and if you use . it will create in miniconda folder and not current folder
+function condaclp() {
+  conda create --clone ${1} -p ${2} ${@:3}
+}
+
+##Reset conda environments
+alias condaerl="conda list --revisions" 
+##and 
+alias condaeri="conda install --rev"

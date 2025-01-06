@@ -1,0 +1,30 @@
+export PYTHONDONTWRITEBYTECODE=1
+# Python Kernel Functions
+
+## Create a Python Kernel from any environment or active python
+function createkernel(){
+    python -m ipykernel install --user --name $1 --display-name "Python (${2:-$1})"
+}
+function createkernelpy3(){
+    python3 -m ipykernel install --user --name $1 --display-name "Python (${2:-$1})"
+}
+
+function createkernelpy3m(){
+    python${1:-3} -m ipykernel install --user --name $2 --display-name "Python (${3:-$2})"
+}
+## List Python Kernels for Jupyter
+function listkernel(){
+    jupyter kernelspec list
+}
+## Delete Python Kernels for Jupyter
+function deletekernel(){
+    jupyter kernelspec uninstall $1
+}
+
+# Python venv Functions
+
+## find venv and activate
+venv() {
+    venv_dir=$(ls -d ./.*/ | grep venv | xargs printf \%sbin/activate)
+    source ${venv_dir}
+}

@@ -1,0 +1,116 @@
+# Function to cache SSH hosts
+_cache_ssh_hosts() {
+    local config_dir="$HOME/.ssh/config.d"
+    SSH_HOSTS=()
+    SSH_HOSTNAMES=()
+
+    # Find and process all config files
+    while IFS= read -r file; do
+        echo "Processing file: $file" >&2
+        local current_host=""
+        while IFS= read -r line || [[ -n "$line" ]]; do
+            # Trim leading and trailing spaces
+            line=$(echo "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+
+            # Match and process Host and HostName lines
+            case "$line" in
+                Host\ *)
+                    current_host="${line#Host }"
+                    SSH_HOSTS+=("$current_host")
+                    SSH_HOSTNAMES+=("") # Placeholder for HostName
+                    ;;
+                HostName\ *)
+                    if [[ -n "$current_host" ]]; then
+                        SSH_HOSTNAMES[-1]="${line#HostName }"
+                    fi
+                    ;;
+            esac
+        done < "$file"
+    done < <(find "$config_dir" -type f -name "config")
+}
+
+# Function to list SSH hosts
+list_ssh_hosts() {
+    # Cache hosts only if not already cached
+    if [[ -z "${SSH_HOSTS[*]}" ]]; then
+        _cache_ssh_hosts
+    fi
+
+    # Check if any hosts were found
+    if (( ${#SSH_HOSTS[@]} == 0 )); then
+        echo "No SSH hosts found in valid config files."
+        return 1
+    fi
+
+    # Display the list of hosts
+    echo "Available SSH hosts:"
+    echo "---------------------"
+    if [[ "$ZSH_VERSION" ]]; then
+        for i in {1..${#SSH_HOSTS[@]}}; do
+            local index=$((i - 1))
+            printf "%2d) %-30s --> %s\n" "$i" "${SSH_HOSTS[$index]}" "${SSH_HOSTNAMES[$index]:-Unknown}"
+        done
+    else
+        for i in "${!SSH_HOSTS[@]}"; do
+            printf "%2d) %-30s --> %s\n" "$((i + 1))" "${SSH_HOSTS[$i]}" "${SSH_HOSTNAMES[$i]:-Unknown}"
+        done
+    fi
+}
+
+# Function to connect to an SSH host
+ssh_connect() {
+    # Cache hosts only if not already cached
+    if [[ -z "${SSH_HOSTS[*]}" ]]; then
+        _cache_ssh_hosts
+    fi
+
+    # Prepare display format for both fzf and manual selection
+    local -a host_display=()
+    if [[ "$ZSH_VERSION" ]]; then
+        for i in {1..${#SSH_HOSTS[@]}}; do
+            local index=$((i - 1))
+            host_display+=("$(printf "%-30s --> %s" "${SSH_HOSTS[$index]}" "${SSH_HOSTNAMES[$index]:-Unknown}")")
+        done
+    else
+        for i in "${!SSH_HOSTS[@]}"; do
+            host_display+=("$(printf "%-30s --> %s" "${SSH_HOSTS[$i]}" "${SSH_HOSTNAMES[$i]:-Unknown}")")
+        done
+    fi
+
+    # Use fzf if available
+    local selected_host=""
+    if command -v fzf > /dev/null; then
+        local selected_entry
+        selected_entry=$(printf "%s\n" "${host_display[@]}" | fzf --prompt="Select host: ")
+        if [[ -n "$selected_entry" ]]; then
+            selected_host=$(echo "$selected_entry" | awk -F ' --> ' '{print $1}' | xargs)
+        fi
+    else
+        # Manual selection
+        echo "Enter the number of the host to connect to:"
+        for i in "${!host_display[@]}"; do
+            printf "%2d) %s\n" "$((i + 1))" "${host_display[$i]}"
+        done
+        read -rp "Selection (1-${#SSH_HOSTS[@]}): " selection
+
+        # Validate selection
+        if [[ ! "$selection" =~ ^[0-9]+$ ]] || (( selection < 1 || selection > ${#SSH_HOSTS[@]} )); then
+            echo "Invalid selection: $selection"
+            return 1
+        fi
+
+        selected_host="${SSH_HOSTS[$((selection - 1))]}"
+    fi
+
+    if [[ -n "$selected_host" ]]; then
+        echo "Connecting to $selected_host..."
+        ssh "$selected_host"
+    else
+        echo "No valid host selected."
+        return 1
+    fi
+}
+
+# Aliases
+alias sshl='list_ssh_hosts'   # Just list hosts
+alias sshc='ssh_connect'     # List and connect

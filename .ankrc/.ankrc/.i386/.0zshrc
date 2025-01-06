@@ -1,0 +1,8 @@
+#alias brew='/usr/local/bin/brew'
+eval "$(/usr/local/bin/brew shellenv)"
+
+export PYENV_ROOT="$HOME/.pyenv_i386"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+alias pyenv="arch -x86_64 pyenv"

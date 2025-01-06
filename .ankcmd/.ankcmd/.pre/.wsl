@@ -1,0 +1,12 @@
+#wsl
+
+alias cdwh='cd "$(wslpath -a "C:\Users\shuklaaak")"'
+alias cdop='cd "$(wslpath -a "C:\Users\shuklaaak\OneDrive\projects\tno")"'
+alias cdot='cd "$(wslpath -a "C:\Users\shuklaaak\OneDrive - TNO\Documents")"'
+alias winxp="explorer.exe"
+
+function cdw() {
+  path=$1
+  newpath=$(wslpath -a "$path")
+  cd "$newpath"
+}

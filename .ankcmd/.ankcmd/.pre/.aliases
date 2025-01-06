@@ -1,0 +1,31 @@
+# Aliases that occure before oh-my-zsh
+
+# alias test="echo Hello from arm64"
+alias ohmyzsh='echo Hey Ankit!!!'
+alias mypath='echo -e ${PATH//:/\\n}'
+alias kmvsc='cat ~/.config/nvim/refs/vscodeBinding.md'
+
+alias nvnvim='nvim ~/.config/nvim/'
+alias codenvim='code ~/.config/nvim/'
+
+alias nvcmd='nvim ~/.ankcmd'
+alias codecmd='code ~/.ankcmd'
+
+alias nvrc='nvim ~/.ankrc'
+alias coderc='code ~/.ankrc'
+
+#Functions
+function myalias() {
+  echo "****"
+  echo "~/.ankcmd/.pre/.${@}"
+  echo "****\n"
+  cat ~/.ankcmd/.pre/.${@}  
+  echo
+}
+
+function sshconfig() {
+  cat ~/.ssh/config.d/${@}/config
+  echo
+}
+
+#

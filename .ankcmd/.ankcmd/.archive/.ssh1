@@ -1,0 +1,90 @@
+# Function to list SSH hosts
+list_ssh_hosts() {
+    local config_dir="$HOME/.ssh/config.d"
+    SSH_HOSTS=()     # Array to store hosts
+    SSH_HOSTNAMES=() # Array to store hostnames or IPs
+
+    # Find and process all config files
+    while IFS= read -r file; do
+        local current_host=""
+        while IFS= read -r line || [[ -n "$line" ]]; do
+            # Remove leading and trailing whitespace
+            line=$(echo "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+
+            # Parse Host lines
+            if [[ "$line" =~ ^[Hh]ost[[:space:]]+([^#[:space:]]+)$ ]]; then
+                current_host="${BASH_REMATCH[1]}"
+                SSH_HOSTS+=("$current_host")
+                SSH_HOSTNAMES+=("") # Placeholder for hostname
+            elif [[ "$line" =~ ^[Hh]ost[Nn]ame[[:space:]]+([^#[:space:]]+)$ ]] && [[ -n "$current_host" ]]; then
+                SSH_HOSTNAMES[-1]="${BASH_REMATCH[1]}"
+            fi
+        done < "$file"
+    done < <(find "$config_dir" -type f -name "config")
+
+    # Check if any hosts were found
+    if (( ${#SSH_HOSTS[@]} == 0 )); then
+        echo "No SSH hosts found in valid config files."
+        return 1
+    fi
+
+    # Display the list of hosts
+    echo "Available SSH hosts:"
+    echo "---------------------"
+    for i in "${!SSH_HOSTS[@]}"; do
+        printf "%2d) %-30s --> %s\n" "$((i + 1))" "${SSH_HOSTS[$i]}" "${SSH_HOSTNAMES[$i]:-Unknown}"
+    done
+}
+
+# Function to connect to an SSH host
+ssh_connect() {
+    # List SSH hosts
+    list_ssh_hosts || return 1
+
+    # Prepare display format for both fzf and manual selection
+    local -a host_display=()
+    for i in "${!SSH_HOSTS[@]}"; do
+        host_display+=("$(printf "%-30s --> %s" "${SSH_HOSTS[$i]}" "${SSH_HOSTNAMES[$i]:-Unknown}")")
+    done
+
+    # Use fzf if available
+    local selected_host=""
+    if command -v fzf > /dev/null; then
+        # Use fzf to select a host
+        local selected_entry
+        selected_entry=$(printf "%s\n" "${host_display[@]}" | fzf --prompt="Select host: ")
+        if [[ -n "$selected_entry" ]]; then
+            # Extract the host name (everything before the `-->`)
+            selected_host=$(echo "$selected_entry" | awk -F ' --> ' '{print $1}' | xargs)
+        fi
+    else
+        # Fallback to manual selection
+        echo "Enter the number of the host to connect to:"
+        for i in "${!host_display[@]}"; do
+            printf "%2d) %s\n" "$((i + 1))" "${host_display[$i]}"
+        done
+        read -rp "Selection (1-${#SSH_HOSTS[@]}): " selection
+
+        # Validate selection
+        if [[ ! "$selection" =~ ^[0-9]+$ ]] || (( selection < 1 || selection > ${#SSH_HOSTS[@]} )); then
+            echo "Invalid selection: $selection"
+            return 1
+        fi
+
+        # Get the host name based on the selection
+        selected_host="${SSH_HOSTS[$((selection - 1))]}"
+    fi
+
+    # Validate and connect to the selected host
+    if [[ -n "$selected_host" ]]; then
+        echo "Connecting to $selected_host..."
+        ssh "$selected_host"
+    else
+        echo "No valid host selected."
+        return 1
+    fi
+}
+
+# Aliases
+alias sshl='list_ssh_hosts'   # Just list hosts
+alias sshc='ssh_connect'     # List and connect
