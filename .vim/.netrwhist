@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/ank/.config/nvim/refs'
+let g:netrw_dirhist_1='/home/ank/.config/nvim'
+let g:netrw_dirhist_0='/Users/ank/.config/nvim'
+let g:netrw_dirhist_9='/Users/ank/techspace/python/fastapi_polls_project/src/polls_api/models'
+let g:netrw_dirhist_8='/Users/ank/techspace/python/fastapi_polls_project/src/polls_api'
+let g:netrw_dirhist_7='/Users/ank/techspace/python/fastapi_polls_project/src'
+let g:netrw_dirhist_6='/Users/ank/techspace/python/fastapi_polls_project'
+let g:netrw_dirhist_5='/Users/ank/.config/nvim/lua'
+let g:netrw_dirhist_4='/Users/ank/.config/nvim'
+let g:netrw_dirhist_3='/home/ank/techspace/ecofed/mvp-python-openstack'
